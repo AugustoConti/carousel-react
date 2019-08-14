@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 
-let useProgress = (animate, time) => {
-  let [progress, setProgress] = useState(0);
+const useProgress = (animate, time) => {
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     if (animate) {
       let rafId = null;
       let start = null;
-      let step = timestamp => {
+      const step = timestamp => {
         if (!start) start = timestamp;
-        let progress = timestamp - start;
+        const progress = timestamp - start;
         setProgress(progress);
         if (progress < time) {
           rafId = requestAnimationFrame(step);

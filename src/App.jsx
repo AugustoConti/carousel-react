@@ -6,14 +6,14 @@ import slides from './slides';
 import useProgress from './useProgress';
 import './App.css';
 
-let SLIDE_DURATION = 2000;
+const SLIDE_DURATION = 2000;
 
-let Carousel = props => <section className="Carousel" {...props} />;
+const Carousel = props => <section className="Carousel" {...props} />;
 
-let Slides = props => <ul {...props} />;
+const Slides = props => <ul {...props} />;
 
-let Slide = ({ isCurrent, takeFocus, image, id, title, children }) => {
-  let ref = useRef();
+const Slide = ({ isCurrent, takeFocus, image, id, title, children }) => {
+  const ref = useRef();
 
   useEffect(() => {
     if (isCurrent && takeFocus) {
@@ -38,9 +38,9 @@ let Slide = ({ isCurrent, takeFocus, image, id, title, children }) => {
   );
 };
 
-let SlideNav = props => <ul className="SlideNav" {...props} />;
+const SlideNav = props => <ul className="SlideNav" {...props} />;
 
-let SlideNavItem = ({ isCurrent, ...props }) => (
+const SlideNavItem = ({ isCurrent, ...props }) => (
   <li className="SlideNavItem">
     <button {...props} aria-current={isCurrent}>
       <span />
@@ -48,12 +48,12 @@ let SlideNavItem = ({ isCurrent, ...props }) => (
   </li>
 );
 
-let Controls = props => <div className="Controls" {...props} />;
+const Controls = props => <div className="Controls" {...props} />;
 
-let IconButton = props => <button className="IconButton" {...props} />;
+const IconButton = props => <button className="IconButton" {...props} />;
 
-let ProgressBar = ({ animate, time }) => {
-  let progress = useProgress(animate, time);
+const ProgressBar = ({ animate, time }) => {
+  const progress = useProgress(animate, time);
 
   return (
     <div className="ProgressBar">
@@ -62,12 +62,12 @@ let ProgressBar = ({ animate, time }) => {
   );
 };
 
-let SpacerGif = ({ width }) => (
+const SpacerGif = ({ width }) => (
   <div style={{ display: 'inline-block', width }} />
 );
 
-let App = () => {
-  let [state, dispatch] = useReducer(
+const App = () => {
+  const [state, dispatch] = useReducer(
     (state, action) => {
       switch (action.type) {
         case 'PROGRESS':
@@ -102,6 +102,7 @@ let App = () => {
           return {
             ...state,
             takeFocus: true,
+            isPlaying: false,
             currentIndex: action.index
           };
         default:
@@ -117,7 +118,7 @@ let App = () => {
 
   useEffect(() => {
     if (state.isPlaying) {
-      let timeout = setTimeout(() => {
+      const timeout = setTimeout(() => {
         dispatch({ type: 'PROGRESS' });
       }, SLIDE_DURATION);
       return () => clearTimeout(timeout);
